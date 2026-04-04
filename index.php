@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include 'includes/db.php'; 
 // Fetch halls from database
 $halls_query = "SELECT * FROM halls LIMIT 3";

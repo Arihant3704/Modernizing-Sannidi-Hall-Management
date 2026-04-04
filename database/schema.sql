@@ -32,15 +32,18 @@ CREATE TABLE IF NOT EXISTS booking (
     user_id INT NOT NULL,
     hall_id INT NOT NULL,
     booking_date DATE NOT NULL,
+    start_time TIME DEFAULT NULL,
+    end_time TIME DEFAULT NULL,
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (hall_id) REFERENCES halls(id) ON DELETE CASCADE
 );
 
--- Initial Admin Account (Password: Admin@123 - hashed version will be set in logic)
--- Note: In a real system, we would insert the hashed password. 
--- For now, this is just for reference.
+-- Initial Admin Account (Password: Admin@123)
+-- The hash below equates to Admin@123
+INSERT IGNORE INTO users (user_name, email, mob, password, role) VALUES 
+('System Admin', 'admin@sannidi.com', '9999999999', '$2y$10$Rz4/5o0sD3g2W13Xz9x9v.C28zSZZj.dKVh2QhZ2yB/wR/v1zF3eG', 'admin');
 
 -- Sample Halls
 INSERT INTO halls (hall_name, location, capacity, price, description) VALUES 

@@ -3,7 +3,7 @@ session_start();
 include '../includes/db.php';
 
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
 }
 
 // Fetch all bookings
-$query = "SELECT b.booking_id, u.user_name, u.email, h.hall_name, b.booking_date, b.status 
+$query = "SELECT b.booking_id, u.user_name, u.email, h.hall_name, b.booking_date, b.start_time, b.end_time, b.status 
           FROM booking b 
           JOIN users u ON b.user_id = u.id 
           JOIN halls h ON b.hall_id = h.id 
@@ -109,6 +109,7 @@ $result = mysqli_query($conn, $query);
     <div class="logo" style="color: var(--primary-color); font-weight: 700;">Sannidi Hall Admin</div>
     <div class="nav-links">
         <a href="admin_dashboard.php">Dashboard</a>
+        <a href="manage_halls.php">Manage Halls</a>
         <a href="view_booking.php" style="color: var(--primary-color);">Manage Bookings</a>
         <a href="../includes/logout.php" class="btn-primary" style="padding: 0.5rem 1rem; margin-left: 1rem;">Logout</a>
     </div>
@@ -127,7 +128,7 @@ $result = mysqli_query($conn, $query);
                 <th>Booking Ref</th>
                 <th>User Details</th>
                 <th>Hall Request</th>
-                <th>Event Date</th>
+                <th>Event Date & Time</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -141,7 +142,12 @@ $result = mysqli_query($conn, $query);
                     <div style="font-size: 0.85rem; color: var(--text-muted);"><?php echo htmlspecialchars($row['email']); ?></div>
                 </td>
                 <td style="font-weight: 500;"><?php echo htmlspecialchars($row['hall_name']); ?></td>
-                <td><?php echo date('M d, Y', strtotime($row['booking_date'])); ?></td>
+                <td>
+                    <?php echo date('M d, Y', strtotime($row['booking_date'])); ?>
+                    <?php if($row['start_time']): ?>
+                        <br><small style="color: var(--text-muted);"><?php echo date('h:i A', strtotime($row['start_time'])) . ' - ' . date('h:i A', strtotime($row['end_time'])); ?></small>
+                    <?php endif; ?>
+                </td>
                 <td>
                     <span class="status-badge status-<?php echo $row['status']; ?>">
                         <?php echo $row['status']; ?>

@@ -75,28 +75,20 @@ session_start();
 
     <div class="gallery-grid">
         <div class="gallery-item">
-            <img src="assets/images/default_hall.jpg" alt="Grand Ballroom" class="gallery-img">
-            <div class="gallery-caption">The Grand Ballroom</div>
+            <img src="assets/images/real_1.png" alt="Grand Entrance" class="gallery-img">
+            <div class="gallery-caption">Sannidhi Hall Grand Entrance</div>
         </div>
         <div class="gallery-item">
-            <img src="assets/images/default_hall.jpg" alt="Royal Wedding Hall" class="gallery-img">
-            <div class="gallery-caption">Royal Wedding Hall</div>
+            <img src="assets/images/real_2.png" alt="Lobby Area" class="gallery-img">
+            <div class="gallery-caption">Spacious Lobby & Reception Area</div>
         </div>
         <div class="gallery-item">
-            <img src="assets/images/default_hall.jpg" alt="Corporate Conference Room" class="gallery-img" style="filter: sepia(0.3);">
-            <div class="gallery-caption">Corporate Conference Room</div>
+            <img src="assets/images/real_3.png" alt="Main Auditorium" class="gallery-img">
+            <div class="gallery-caption">Main Auditorium Overview</div>
         </div>
         <div class="gallery-item">
-            <img src="assets/images/default_hall.jpg" alt="Garden View Hall" class="gallery-img" style="filter: brightness(1.1);">
-            <div class="gallery-caption">Garden View Hall</div>
-        </div>
-        <div class="gallery-item">
-            <img src="assets/images/default_hall.jpg" alt="Banquet Space" class="gallery-img" style="filter: contrast(1.2);">
-            <div class="gallery-caption">Banquet Space</div>
-        </div>
-        <div class="gallery-item">
-            <img src="assets/images/default_hall.jpg" alt="Lounge Area" class="gallery-img" style="filter: hue-rotate(5deg);">
-            <div class="gallery-caption">Lounge Area</div>
+            <img src="assets/images/real_4.png" alt="Stage View" class="gallery-img">
+            <div class="gallery-caption">Elegant Stage Front</div>
         </div>
     </div>
     

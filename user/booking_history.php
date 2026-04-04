@@ -3,12 +3,12 @@ session_start();
 include '../includes/db.php';
 
 if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
-$query = "SELECT b.booking_id, h.hall_name, b.booking_date, b.status 
+$query = "SELECT b.booking_id, h.hall_name, b.booking_date, b.start_time, b.end_time, b.status 
           FROM booking b 
           JOIN halls h ON b.hall_id = h.id 
           WHERE b.user_id = ? 
@@ -90,7 +90,7 @@ $result = mysqli_stmt_get_result($stmt);
             <tr>
                 <th>Reference ID</th>
                 <th>Hall Name</th>
-                <th>Event Date</th>
+                <th>Event Date & Time</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -99,7 +99,12 @@ $result = mysqli_stmt_get_result($stmt);
             <tr>
                 <td style="font-family: monospace; color: var(--text-muted);">#BK-<?php echo str_pad($row['booking_id'], 5, '0', STR_PAD_LEFT); ?></td>
                 <td style="font-weight: 500;"><?php echo htmlspecialchars($row['hall_name']); ?></td>
-                <td><?php echo date('M d, Y', strtotime($row['booking_date'])); ?></td>
+                <td>
+                    <?php echo date('M d, Y', strtotime($row['booking_date'])); ?>
+                    <?php if($row['start_time']): ?>
+                        <br><small style="color: var(--text-muted);"><?php echo date('h:i A', strtotime($row['start_time'])) . ' - ' . date('h:i A', strtotime($row['end_time'])); ?></small>
+                    <?php endif; ?>
+                </td>
                 <td>
                     <span class="status-badge status-<?php echo $row['status']; ?>">
                         <?php echo $row['status']; ?>

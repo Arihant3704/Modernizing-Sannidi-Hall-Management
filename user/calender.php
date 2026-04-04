@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../includes/db.php');
 
 $result = mysqli_query($conn,"SELECT booking_date,status FROM booking");

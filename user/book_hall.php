@@ -3,7 +3,7 @@ session_start();
 include '../includes/db.php';
 
 if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -11,11 +11,13 @@ $message = "";
 if(isset($_POST['book'])) {
     $hall_id = $_POST['hall_id'];
     $date = $_POST['date'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
     $user_id = $_SESSION['user_id'];
 
-    if(!empty($hall_id) && !empty($date)) {
-        $stmt = mysqli_prepare($conn, "INSERT INTO booking (user_id, hall_id, booking_date, status) VALUES (?, ?, ?, 'pending')");
-        mysqli_stmt_bind_param($stmt, "iis", $user_id, $hall_id, $date);
+    if(!empty($hall_id) && !empty($date) && !empty($start_time) && !empty($end_time)) {
+        $stmt = mysqli_prepare($conn, "INSERT INTO booking (user_id, hall_id, booking_date, start_time, end_time, status) VALUES (?, ?, ?, ?, ?, 'pending')");
+        mysqli_stmt_bind_param($stmt, "iisss", $user_id, $hall_id, $date, $start_time, $end_time);
         
         if(mysqli_stmt_execute($stmt)) {
             $message = "<div style='color: #2e7d32; background: #e8f5e9; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;'>Booking request submitted successfully! We will review and contact you soon.</div>";
@@ -24,7 +26,7 @@ if(isset($_POST['book'])) {
         }
         mysqli_stmt_close($stmt);
     } else {
-        $message = "<div style='color: #c62828; background: #ffebee; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;'>Please fill in all fields.</div>";
+        $message = "<div style='color: #c62828; background: #ffebee; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;'>Please fill in all fields including time slots.</div>";
     }
 }
 ?>
@@ -75,9 +77,19 @@ if(isset($_POST['book'])) {
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="date">Event Date</label>
-                <input type="date" id="date" name="date" required min="<?php echo date('Y-m-d'); ?>">
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                <div>
+                    <label for="date">Event Date</label>
+                    <input type="date" id="date" name="date" required min="<?php echo date('Y-m-d'); ?>" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label>Timeslot</label>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                        <input type="time" name="start_time" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+                        <span>to</span>
+                        <input type="time" name="end_time" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+                    </div>
+                </div>
             </div>
 
             <div style="margin-top: 2rem;">

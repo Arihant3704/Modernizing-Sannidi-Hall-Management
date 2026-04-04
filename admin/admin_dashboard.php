@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 include('../includes/db.php');
@@ -59,6 +59,7 @@ $approved = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM booking WHERE stat
     <div class="logo" style="color: var(--primary-color); font-weight: 700;">Sannidi Hall Admin</div>
     <div class="nav-links">
         <a href="admin_dashboard.php" class="active">Dashboard</a>
+        <a href="manage_halls.php">Manage Halls</a>
         <a href="view_booking.php">Manage Bookings</a>
         <a href="../includes/logout.php" class="btn-primary" style="padding: 0.5rem 1rem; margin-left: 1rem;">Logout</a>
     </div>
