@@ -1,0 +1,7 @@
+{
+    "name": "arihant3704/modernizing-sannidi-hall-management",
+    "description": "Premium Hall Management System",
+    "require": {
+        "php": ">=7.4"
+    }
+}

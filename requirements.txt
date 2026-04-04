@@ -1,4 +1,0 @@
-php>=7.4
-mysql-server>=5.7
-php-mysqli
-php-session
