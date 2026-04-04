@@ -1,12 +1,14 @@
 <?php
 // Database configuration
-$host = "localhost";
-$user = "sannidi_user";
-$password = "sannidi123";
-$dbname = "sannidi_hall";
+// Fallback to local credentials if no environment variables are set
+$host     = getenv('DB_HOST') ?: "localhost";
+$user     = getenv('DB_USER') ?: "sannidi_user";
+$password = getenv('DB_PASSWORD') ?: "sannidi123";
+$dbname   = getenv('DB_NAME') ?: "sannidi_hall";
+$port     = getenv('DB_PORT') ?: "3306";
 
 // Create connection
-$conn = mysqli_connect($host, $user, $password, $dbname);
+$conn = mysqli_connect($host, $user, $password, $dbname, $port);
 
 // Check connection
 if (!$conn) {
