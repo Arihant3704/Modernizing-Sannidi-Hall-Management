@@ -1,11 +1,22 @@
 <?php
 // Database configuration
-// Fallback to local credentials if no environment variables are set
-$host     = getenv('DB_HOST') ?: "localhost";
-$user     = getenv('DB_USER') ?: "sannidi_user";
-$password = getenv('DB_PASSWORD') ?: "sannidi123";
-$dbname   = getenv('DB_NAME') ?: "sannidi_hall";
+// On Vercel, we MUST have environment variables set.
+$host     = getenv('DB_HOST');
+$user     = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$dbname   = getenv('DB_NAME');
 $port     = getenv('DB_PORT') ?: "3306";
+
+// If missing crucial variables, and we aren't local, show error
+if (!$host && (getenv('VERCEL') || getenv('NOW_REGION'))) {
+    die("Deployment Error: Database environment variables (DB_HOST, etc.) are NOT configured in the Vercel Dashboard. Please check VERCEL_DEPLOYMENT.md for instructions.");
+}
+
+// Fallback for local development if not in production
+$host     = $host ?: "localhost";
+$user     = $user ?: "sannidi_user";
+$password = $password ?: "sannidi123";
+$dbname   = $dbname ?: "sannidi_hall";
 
 // Create connection
 $conn = mysqli_connect($host, $user, $password, $dbname, $port);
