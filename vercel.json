@@ -1,0 +1,15 @@
+{
+  "functions": {
+    "**/*.php": {
+      "runtime": "vercel-php@0.9.0"
+    }
+  },
+  "routes": [
+    { "src": "/includes/db.php", "status": 403 },
+    { "src": "/database/(.*)", "status": 403 },
+    { "src": "/Dockerfile", "status": 403 },
+    { "src": "/render.yaml", "status": 403 },
+    { "src": "/start.sh", "status": 403 },
+    { "handle": "filesystem" }
+  ]
+}
