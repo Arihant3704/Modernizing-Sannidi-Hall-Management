@@ -15,5 +15,5 @@ echo "[INFO] Ensure your MySQL service is running and you have imported 'schema.
 echo "[INFO] Running PHP development server on http://localhost:8000 ..."
 echo ""
 
-# Start the built in PHP development server
-php -S localhost:8000
+# Start the built-in PHP development server using the router
+php -S localhost:8000 router.php
