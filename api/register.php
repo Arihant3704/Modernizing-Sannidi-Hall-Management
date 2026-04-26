@@ -59,7 +59,7 @@
 </div>
 
 <?php
-include('includes/db.php');
+include(__DIR__ . '/includes/db.php');
 
 if(isset($_POST['submit'])) {
     $user_name = $_POST['name'];

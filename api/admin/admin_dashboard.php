@@ -4,7 +4,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../login.php");
     exit();
 }
-include('../includes/db.php');
+include(__DIR__ . '/../includes/db.php');
 
 $total_users = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM users"));
 $total_bookings = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM booking"));

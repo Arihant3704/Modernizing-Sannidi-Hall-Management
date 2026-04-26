@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../includes/db.php';
+include __DIR__ . '/../includes/db.php';
 
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../login.php");

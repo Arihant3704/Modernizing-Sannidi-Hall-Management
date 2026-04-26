@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include 'includes/db.php'; 
+include __DIR__ . '/includes/db.php'; 
 // Fetch halls from database
 $halls_query = "SELECT * FROM halls LIMIT 3";
 $halls_result = mysqli_query($conn, $halls_query);
